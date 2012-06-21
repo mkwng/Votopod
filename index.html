@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Votopod</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <!-- <link href="css/bootstrap-responsive.css" rel="stylesheet"> -->
+
+    <link href="css/main.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" herf="ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" herf="">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" herf="">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" herf="">
+    <link rel="apple-touch-icon-precomposed" herf="">
+  </head>
+
+  <body>
+<!-- 
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Project name</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+ -->
+
+    <div id="grid" class="container">
+
+      <div class="row header">
+        <div class="span8">
+          <h1>Votopod: <span>Name the New Meeting Rooms</span></h1>
+        </div>
+        <div class="span4"> 
+          <div class="phase-1">
+            <a href="#" class="new-form">Submit a new theme</a>
+          </div>
+          <div class="phase-2">
+            <p><em>In review&hellip;</em> Please visit again in <span class="days">7</span> days.</p>
+          </div>
+          <div class="phase-3">
+            <p><em>Vote now!</em> The polls are open for <span class="days">7</span> days.</p>
+          </div>
+          <div class="phase-4">
+            <p><em>Thank you for participating!</em></p>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+      <br />
+      <div class="row">
+
+        <div class="contestant span4" data-id="" data-name="Group Name" data-author="Michael">
+          <a href="#"><div class="contestant-area">
+            <ol class="contestant-area-roomblock">
+              <li class="room-1 left"   data-name="Really Really Long Long Name"><span class="room-name"></span></li>
+              <li class="room-2 right"  data-name="A Long Name Here"><span class="room-name"></span></li>
+              <li class="room-3 left"   data-name="Room 3"><span class="room-name"></span></li>
+              <li class="room-4 right"  data-name="Room 4"><span class="room-name"></span></li>
+              <li class="room-5 left"   data-name="Room 5"><span class="room-name"></span></li>
+              <li class="room-6 right"  data-name="Room 6"><span class="room-name"></span></li>
+              <li class="room-7 right"  data-name="Room 7"><span class="room-name"></span></li>
+              <!-- last one is "right" -->
+            </ol>
+          </div>
+          <div class="contestant-title">
+            <div class="contestant-title-block">
+              <h2>"Name Goes Here"</h2>
+              <p>Submitted by: <span class="title-author">Author Goes Here</span></p>
+            </div>
+            <div class="contestant-title-vote phase-3">
+              <div class="vote-button">Vote</div>
+            </div>
+          </div></a>
+        </div> <!-- /contestant -->
+
+        <div class="contestant span4" data-name="Group Name 2" data-author="Jayeon">
+          <a href="#"><div class="contestant-area">
+            <ol class="contestant-area-roomblock">
+              <li class="room-1 left"   data-name="Room 8"><span class="room-name"></span></li>
+              <li class="room-2 right"  data-name="Room 9"><span class="room-name"></span></li>
+              <li class="room-3 left"   data-name="Room 10"><span class="room-name"></span></li>
+              <li class="room-4 right"  data-name="Room 11"><span class="room-name"></span></li>
+              <li class="room-5 left"   data-name="Room 12"><span class="room-name"></span></li>
+              <li class="room-6 right"  data-name="Room 13"><span class="room-name"></span></li>
+              <li class="room-7 right"  data-name="Room 14"><span class="room-name"></span></li>
+            </ol>
+          </div>
+          <div class="contestant-title">
+            <div class="contestant-title-block">
+              <h2>"Name Goes Here"</h2>
+              <p>Submitted by: <span class="title-author">Author Goes Here</span></p>
+            </div>
+            <div class="contestant-title-vote phase-3">
+              <div class="vote-button">Vote</div>
+            </div>
+          </div></a> 
+        </div><!-- /contestant -->
+
+        <div class="contestant span4" data-name="Group Name 3" data-author="Rick">
+          <a href="#"><div class="contestant-area">
+            <ol class="contestant-area-roomblock">
+              <li class="room-1 left"   data-name="Room 15"><span class="room-name"></span></li>
+              <li class="room-2 right"  data-name="Room 16"><span class="room-name"></span></li>
+              <li class="room-3 left"   data-name="Room 17"><span class="room-name"></span></li>
+              <li class="room-4 right"  data-name="Room 18"><span class="room-name"></span></li>
+              <li class="room-5 left"   data-name="Room 19"><span class="room-name"></span></li>
+              <li class="room-6 right"  data-name="Room 20"><span class="room-name"></span></li>
+              <li class="room-7 right"  data-name="Room 21"><span class="room-name"></span></li>
+            </ol>
+          </div>
+          <div class="contestant-title">
+            <div class="contestant-title-block">
+              <h2>"Name Goes Here"</h2>
+              <p>Submitted by: <span class="title-author">Author Goes Here</span></p>
+            </div>
+            <div class="contestant-title-vote phase-3">
+              <div class="vote-button">Vote</div>
+            </div>
+          </div></a> 
+        </div><!-- /contestant -->
+
+        <div class="contestant span4" data-name="Group Name 4" data-author="Linzi">
+          <a href="#"><div class="contestant-area">
+            <ol class="contestant-area-roomblock">
+              <li class="room-1 left"   data-name="Room 22"><span class="room-name"></span></li>
+              <li class="room-2 right"  data-name="Room 23"><span class="room-name"></span></li>
+              <li class="room-3 left"   data-name="Room 24"><span class="room-name"></span></li>
+              <li class="room-4 right"  data-name="Room 25"><span class="room-name"></span></li>
+              <li class="room-5 left"   data-name="Room 26"><span class="room-name"></span></li>
+              <li class="room-6 right"  data-name="Room 27"><span class="room-name"></span></li>
+              <li class="room-7 right"  data-name="Room 28"><span class="room-name"></span></li> 
+            </ol>
+          </div>
+          <div class="contestant-title">
+            <div class="contestant-title-block">
+              <h2>"Name Goes Here"</h2>
+              <p>Submitted by: <span class="title-author">Author Goes Here</span></p>
+            </div>
+            <div class="contestant-title-vote phase-3">
+              <div class="vote-button">Vote</div>
+            </div>
+          </div></a> 
+        </div><!-- /contestant -->
+
+        <div class="contestant span4" data-name="Group Name 5" data-author="Sam">
+          <a href="#"><div class="contestant-area">
+            <ol class="contestant-area-roomblock">
+              <li class="room-1 left"   data-name="Room 29"><span class="room-name"></span></li>
+              <li class="room-2 right"  data-name="Room 30"><span class="room-name"></span></li>
+              <li class="room-3 left"   data-name="Room 31"><span class="room-name"></span></li>
+              <li class="room-4 right"  data-name="Room 32"><span class="room-name"></span></li>
+              <li class="room-5 left"   data-name="Room 33"><span class="room-name"></span></li>
+              <li class="room-6 right"  data-name="Room 34"><span class="room-name"></span></li>
+              <li class="room-7 right"  data-name="Room 35"><span class="room-name"></span></li> 
+            </ol>
+          </div>
+          <div class="contestant-title">
+            <div class="contestant-title-block">
+              <h2>"Name Goes Here"</h2>
+              <p>Submitted by: <span class="title-author">Author Goes Here</span></p>
+            </div>
+            <div class="contestant-title-vote phase-3">
+              <div class="vote-button">Vote</div>
+            </div>
+          </div></a> 
+        </div><!-- /contestant -->
+
+      </div> <!-- /row -->
+
+    </div> <!-- /container -->
+
+    <div id="footer">
+      <div class="container">
+        <h2>What is this?</h2><br />
+
+        <h3>Phase 1</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In odio mauris, tincidunt vitae scelerisque nec, sodales pulvinar ligula. Fusce ut elit libero. Vestibulum faucibus rutrum libero id sagittis. </p>
+
+        <h3>Phase 2</h3>
+        <p>Praesent magna eros, adipiscing in dapibus sit amet, ultricies ac elit. Donec erat sem, pretium sit amet laoreet sed, malesuada ac metus. Praesent sodales, dui nec venenatis vulputate, lacus metus tristique urna, vitae aliquet orci orci id est. Praesent a scelerisque ipsum. Nulla lacus orci, convallis nec ultrices id, ultricies eget lorem. </p>
+
+        <h3>Phase 3</h3>
+        <p>Sed ac arcu sit amet nunc bibendum fermentum nec id lorem. Vestibulum ac euismod est.</p>
+      </div>
+    </div>
+
+    <div id="map" class="container" style="display:none">
+      <div class="map-cover"></div>
+
+      <div class="map-nav" style="display:none">
+        <a href="#" class="map-nav-left"><span>Previous</span></a>
+        <a href="#" class="map-nav-right"><span>Next</span></a>
+        <a href="#" class="map-nav-close"><span>Close</span></a>
+      </div>
+
+
+      <div class="map-title">
+        <h2></h2>
+        <p>Submitted by: <span class="title-author"></span></p>
+      </div>
+        <div class="map-labels" style="display:none">
+
+        </div>
+      <div class="map-container">
+        <div class="map-container-bigmap"></div>
+        <div class="map-container-shadow"></div>
+      </div> 
+    </div> <!-- /map -->
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/transformjs.1.0.beta.2.js"></script>
+    <script src="js/autogrowinput.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
