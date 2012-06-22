@@ -1,5 +1,33 @@
 //Phase: 1: Submission, 2: Review, 3: Voting, 4: Complete
-var phase = 3;
+var phase = 1;
+
+(function($){
+    $.fn.getStyleObject = function(){
+        var dom = this.get(0);
+        var style;
+        var returns = {};
+        if(window.getComputedStyle){
+            var camelize = function(a,b){
+                return b.toUpperCase();
+            };
+            style = window.getComputedStyle(dom, null);
+            for(var i = 0, l = style.length; i < l; i++){
+                var prop = style[i];
+                var camel = prop.replace(/\-([a-z])/g, camelize);
+                var val = style.getPropertyValue(prop);
+                returns[camel] = val;
+            };
+            return returns;
+        };
+        if(style = dom.currentStyle){
+            for(var prop in style){
+                returns[prop] = style[prop];
+            };
+            return returns;
+        };
+        return this.css();
+    }
+})(jQuery);
 
 var Map = {
 	activeIndex: 0, 
@@ -31,6 +59,9 @@ var Map = {
 			}).animate({
 				translateX:0,
 				opacity:1
+			},300,function() {
+				self.labels.fadeIn();
+				self.mapTitles.fadeIn();
 			});
 		}
 		else if(options.direction == "right") {
@@ -42,6 +73,9 @@ var Map = {
 			}).animate({
 				translateX:0,
 				opacity:1
+			},300,function() {
+				self.labels.fadeIn();
+				self.mapTitles.fadeIn();
 			});
 		}
 		else {
@@ -51,7 +85,10 @@ var Map = {
 				rotateX: -Math.PI/4,
 				translateZ: 240,
 				scale:.75
-			},300);
+			},650,function() {
+				self.labels.fadeIn();
+				self.mapTitles.fadeIn();
+			});
 		}
 	},
 	buildOut: function(opts) {
@@ -67,19 +104,20 @@ var Map = {
 		else {
 			self.labels.fadeOut(100);
 			self.nav.fadeOut(100);
-			self.bigmap.stop().animate({
-				rotateX: 0,
-				translateZ: 0,
-				scale:1
-			},300);
-			self.mapContainer.stop().fadeOut(200, function() {
+			self.mapContainer.stop().fadeOut(300, function() {
 				self.labels.hide().find('ol').remove();
 				self.mapTitles.find("h2").html('""');
 				self.mapTitles.find(".title-author").html("");
 				self.mapContainer.find(".error").removeClass("error");
-				$(".form-submit").remove()
+				$(".form-submit").remove();
+				self.bigmap.stop().css({
+					rotateX: 0,
+					translateZ: 0,
+					scale:1
+				});
 			});
 		}
+		console.log("got here before freeze")
 	},
 	confirmClose: function() {
 		var self = this;
@@ -135,8 +173,7 @@ var Map = {
 			self.mapTitles.find("h2").html('"'+title+'"');
 			self.mapTitles.find(".title-author").html(author);
 
-			self.labels.fadeIn();
-			self.mapTitles.fadeIn();
+
 		}
 	},
 	buildForm: function() {
@@ -175,8 +212,6 @@ var Map = {
 			});
 		});
 
-		self.labels.fadeIn();
-		self.mapTitles.fadeIn();
 
 		//Form Validation
 		submitButton.unbind("click").click(function() {
@@ -200,21 +235,22 @@ var Map = {
 		console.log(errors + " errors")
 		if(errors==0) {
 
-			// $('#id_author').val($('#author-name').val().replace(/\W/g, ''));
-			// $('#id_title').val($('#theme-name').val().replace(/\W/g, ''));
-			// $('#id_room_1_name').val($('#room-1').val().replace(/\W/g, ''));
-			// $('#id_room_2_name').val($('#room-2').val().replace(/\W/g, ''));
-			// $('#id_room_3_name').val($('#room-3').val().replace(/\W/g, ''));
-			// $('#id_room_4_name').val($('#room-4').val().replace(/\W/g, ''));
-			// $('#id_room_5_name').val($('#room-5').val().replace(/\W/g, ''));
-			// $('#id_room_6_name').val($('#room-6').val().replace(/\W/g, ''));
-			// $('#id_room_7_name').val($('#room-7').val().replace(/\W/g, ''));
+			$('#id_author').val($('#author-name').val().replace(/\W/g, ''));
+			$('#id_title').val($('#theme-name').val().replace(/\W/g, ''));
+			$('#id_room_1_name').val($('#room-1').val().replace(/\W/g, ''));
+			$('#id_room_2_name').val($('#room-2').val().replace(/\W/g, ''));
+			$('#id_room_3_name').val($('#room-3').val().replace(/\W/g, ''));
+			$('#id_room_4_name').val($('#room-4').val().replace(/\W/g, ''));
+			$('#id_room_5_name').val($('#room-5').val().replace(/\W/g, ''));
+			$('#id_room_6_name').val($('#room-6').val().replace(/\W/g, ''));
+			$('#id_room_7_name').val($('#room-7').val().replace(/\W/g, ''));
 			// $.each("#themeForm input", function() {
 			// 	console.log( $(this).val() );
 			// });
 
 			popupMessage("Thank you for your submission!");
 			self.buildOut({confirmed:true});
+
 
 			$("#submit").submit();
 
@@ -375,9 +411,7 @@ var initializeContestant = function(contestant) {
 
 		//Build in the map view
 		self.click(function() {
-			$(this).mouseout();
-			Map.buildLabels(this);
-			Map.buildIn();
+			contestantClick(this);
 			return false;
 		});
 }
@@ -391,6 +425,62 @@ var initializeVote = function() {
 		$(".vote-button").addClass("disabled");
 		popupMessage("Thank you for your vote!");
 	});
+}
+
+var mapRoomPositions = {
+	0:["155","52",".7",".3"],
+	1:["348","154",".75",".33"],
+	2:["425","154",".75",".33"],
+	3:["343","202",".8",".4"],
+	4:["426","202",".8",".4"],
+	5:["738","234","1",".5"],
+	6:["750","311","1",".5"]
+}
+var contestantClick = function(contestant) {
+	Map.buildLabels(contestant);
+	Map.buildIn();
+
+	var flyingBoxes = $(contestant).clone();
+	flyingBoxes.css({
+			position:"fixed",
+			top:$(contestant).offset().top,
+			left:$(contestant).offset().left,
+			margin:"0",
+			padding:"0",
+			zIndex:"100",
+			pointerEvents:"none",
+			width:"904px",
+			height:"648px",
+		})
+		.animate({
+			top:"80px",
+			left:$(".map-container").offset().left,
+		},600);
+
+	flyingBoxes.find(".contestant-title").css({visibility:"hidden"});
+	flyingBoxes.find(".contestant-area").css({background:"transparent"});
+	flyingBoxes.appendTo("body");
+
+
+	var rooms = flyingBoxes.find("li");
+
+	rooms.stop().each(function(i) {
+		var self = $(this).css({position:"absolute"});
+		self.css({
+
+		}).animate({
+			translateZ: 240,
+			rotateY:0,
+			rotateX: -Math.PI/4,
+			left:mapRoomPositions[i][0],
+			top:mapRoomPositions[i][1],
+			scaleY:mapRoomPositions[i][3],
+			scaleX:mapRoomPositions[i][2],
+			opacity:.3
+		},600).fadeTo(300,0,function() {flyingBoxes.remove();});
+	});
+
+	$(contestant).mouseout();
 }
 
 var popupMessage = function(message){

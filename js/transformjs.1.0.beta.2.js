@@ -261,6 +261,66 @@ $M = Matrix.create;
         }
       }
     },
+    scaleX: {
+      defaultValue: 1,
+      matrix: function(s) {
+        if (supports3d) {
+          return $M([
+            [s,0,0,0],
+            [0,1,0,0],
+            [0,0,1,0],
+            [0,0,0,1]
+          ]);
+        }
+        else {
+          return $M([
+            [s,0,0],
+            [0,1,0],
+            [0,0,1]
+          ]);
+        }
+      }
+    },
+    scaleY: {
+      defaultValue: 1,
+      matrix: function(s) {
+        if (supports3d) {
+          return $M([
+            [1,0,0,0],
+            [0,s,0,0],
+            [0,0,1,0],
+            [0,0,0,1]
+          ]);
+        }
+        else {
+          return $M([
+            [1,0,0],
+            [0,s,0],
+            [0,0,1]
+          ]);
+        }
+      }
+    },
+    scaleZ: {
+      defaultValue: 1,
+      matrix: function(s) {
+        if (supports3d) {
+          return $M([
+            [1,0,0,0],
+            [0,1,0,0],
+            [0,0,s,0],
+            [0,0,0,1]
+          ]);
+        }
+        else {
+          return $M([
+            [1,0,0],
+            [0,1,0],
+            [0,0,1]
+          ]);
+        }
+      }
+    },
     translateX: {
       defaultValue: 0,
       matrix: function(tx) {
