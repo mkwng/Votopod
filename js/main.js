@@ -89,7 +89,6 @@ var Map = {
 				});
 			});
 		}
-		console.log("got here before freeze")
 	},
 	confirmClose: function() {
 		var self = this;

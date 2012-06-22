@@ -6,6 +6,9 @@ body {
   background: #de3d81;
   color: #ffffff;
 }
+h1 {
+  font-family: AauxNext-Regular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 h1 span {
   font-weight: normal;
   font-size: .9em;
@@ -17,10 +20,16 @@ a:hover {
   color: #ce3475;
   text-decoration: none;
 }
+hr {
+  border: none;
+  background: repeat-x url(../img/header_horiz_dots.gif) bottom;
+  margin: 0;
+  height: 1px;
+}
 .default-button {
   display: block;
   float: left;
-  margin: 5px 0;
+  margin: 0 0 15px 0;
   padding: 10px 30px;
   background: #bb2d69;
   border-radius: 10px;
@@ -46,7 +55,7 @@ a:hover {
 .header .phase-1 a.new-form {
   display: block;
   float: left;
-  margin: 5px 0;
+  margin: 0 0 15px 0;
   padding: 10px 30px;
   background: #bb2d69;
   border-radius: 10px;
@@ -633,11 +642,20 @@ a:hover {
 }
 /******** Footer **********/
 #footer {
-  margin-top: 50px;
+  position: relative;
+  margin-top: 120px;
   background: #ffffff url(../img/pink_dot_bg.gif) repeat-x;
   min-height: 400px;
   color: #2d2d2d;
-  padding-top: 200px;
+}
+#footer .container {
+  position: absolute;
+  margin-top: -80px;
+  background: white;
+  padding: 40px;
+  width: 860px;
+  margin-left: -470px;
+  left: 50%;
 }
 /******** Misc/Popups **********/
 .confirm {
@@ -753,11 +771,17 @@ a:hover {
   font-weight: bold;
   text-align: center;
 }
+.popup .popup-message .default-button {
+  margin: 20px auto;
+  float: none;
+  width: 80px;
+  text-align: center;
+}
 .popup .popup-message .button-wrap {
   margin: 0 auto;
   width: 312px;
 }
-.popup .popup-message .default-button {
+.popup .popup-message .button-wrap .default-button {
   margin: 20px 8px 0;
   float: right;
   width: 80px;
