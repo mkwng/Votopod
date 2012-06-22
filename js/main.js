@@ -1,34 +1,6 @@
 //Phase: 1: Submission, 2: Review, 3: Voting, 4: Complete
 var phase = 1;
 
-(function($){
-    $.fn.getStyleObject = function(){
-        var dom = this.get(0);
-        var style;
-        var returns = {};
-        if(window.getComputedStyle){
-            var camelize = function(a,b){
-                return b.toUpperCase();
-            };
-            style = window.getComputedStyle(dom, null);
-            for(var i = 0, l = style.length; i < l; i++){
-                var prop = style[i];
-                var camel = prop.replace(/\-([a-z])/g, camelize);
-                var val = style.getPropertyValue(prop);
-                returns[camel] = val;
-            };
-            return returns;
-        };
-        if(style = dom.currentStyle){
-            for(var prop in style){
-                returns[prop] = style[prop];
-            };
-            return returns;
-        };
-        return this.css();
-    }
-})(jQuery);
-
 var Map = {
 	activeIndex: 0, 
 	mapContainer:$("#map"),
@@ -121,21 +93,22 @@ var Map = {
 	},
 	confirmClose: function() {
 		var self = this;
-
-		var popup = $('<div class="confirm" style="display:none"><h2>Are you sure?</h2><p>You will lose all progress.</p><a class="confirm-close" href="#">Close</a><a class="confirm-cancel" href="#">Don&apos;t Close</a></div>');
-		popup.appendTo("body").fadeIn(200);
-		popup.find(".confirm-cancel").click(function() {
-			popup.fadeOut(100, function() {
-				popup.remove();
-			})
-		});
-		popup.find(".confirm-close").click(function() {
-			popup.fadeOut(100, function() {
-				$(".confirm").remove();
-			})
-			self.activeIndex = 0
-			self.buildOut({confirmed: true});
-		});
+		if($(".popup").size()==0){
+				var popup = $('<div class="popup" style="display:none"><div class="popup-cover"></div><div class="popup-message"><p>Are you sure?</p><p>You will lose all progress.</p><div class="button-wrap"><a class="confirm-close default-button" href="#">Close</a><a class="confirm-cancel default-button" href="#">Don&apos;t Close</a></div></div></div>');
+				popup.appendTo("body").fadeIn(200);
+				popup.find(".confirm-cancel").click(function() {
+					popup.fadeOut(100, function() {
+						popup.remove();
+					})
+				});
+				popup.find(".confirm-close").click(function() {
+					popup.fadeOut(100, function() {
+						$(".popup").remove();
+					})
+					self.activeIndex = 0
+					self.buildOut({confirmed: true});
+				});
+			}
 	},
 	buildLabels: function(contestant) {
 		var self = this;
@@ -264,10 +237,10 @@ var Map = {
 		var contestants = $(".contestant");
 		var next = ++self.activeIndex >= contestants.size() ? 0 : self.activeIndex;
 		console.log(next);
-		self.labels.hide().find('ol').remove();
-		mapTitles = self.mapContainer.find(".map-title").hide();
+		self.labels.stop().hide().find('ol').stop().remove();
+		mapTitles = self.mapContainer.find(".map-title").stop().hide();
 
-		self.bigmap.animate({translateX:"-=400",opacity:"0"},300,function() {
+		self.bigmap.stop().animate({translateX:"-=400",opacity:"0"},300,function() {
 			self.buildIn({direction:"left"});
 			self.buildLabels(contestants.eq(next));
 		});
@@ -277,10 +250,10 @@ var Map = {
 		var contestants = $(".contestant");
 		var next = --self.activeIndex < 0 ? contestants.size()-1 : self.activeIndex;
 		console.log(next);
-		self.labels.hide().find('ol').remove();
-		mapTitles = self.mapContainer.find(".map-title").hide();
+		self.labels.stop().hide().find('ol').stop().remove();
+		mapTitles = self.mapContainer.find(".map-title").stop().hide();
 
-		self.bigmap.animate({translateX:"+=400",opacity:"0"},300,function() {
+		self.bigmap.stop().animate({translateX:"+=400",opacity:"0"},300,function() {
 			self.buildIn({direction:"right"});
 			self.buildLabels(contestants.eq(next));
 		});
@@ -484,17 +457,19 @@ var contestantClick = function(contestant) {
 }
 
 var popupMessage = function(message){
-	var popupContainer = $('<div class="popup"></div>');
-	var popupCover = $('<div class="popup-cover"></div>');
-	var popupMessage = $('<div class="popup-message"><p></p><div class="default-button">Dismiss</div></div>');
-	popupCover.appendTo(popupContainer);
-	popupMessage.find("p").html(message);
-	popupMessage.appendTo(popupContainer);
-	popupContainer.appendTo("body").fadeIn(200);
-
-	popupContainer.click(function() {
-		$(this).fadeOut(200,function() {$(this).remove();});
-	});
+	if($(".popup").size()==0) {
+		var popupContainer = $('<div class="popup"></div>');
+		var popupCover = $('<div class="popup-cover"></div>');
+		var popupMessage = $('<div class="popup-message"><p></p><div class="default-button">Dismiss</div></div>');
+		popupCover.appendTo(popupContainer);
+		popupMessage.find("p").html(message);
+		popupMessage.appendTo(popupContainer);
+		popupContainer.appendTo("body").fadeIn(300);
+	
+		popupContainer.click(function() {
+			$(this).fadeOut(300,function() {$(this).remove();});
+		});
+	}
 }
 
 $(document).ready(function() {

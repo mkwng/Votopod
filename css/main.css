@@ -753,9 +753,13 @@ a:hover {
   font-weight: bold;
   text-align: center;
 }
+.popup .popup-message .button-wrap {
+  margin: 0 auto;
+  width: 312px;
+}
 .popup .popup-message .default-button {
-  margin: 20px auto;
-  float: none;
+  margin: 20px 8px 0;
+  float: right;
   width: 80px;
   text-align: center;
 }
