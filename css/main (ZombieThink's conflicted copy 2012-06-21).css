@@ -1,13 +1,9 @@
-/******** Global Elements **********/
 input:focus {
   outline: none !important;
 }
 body {
   background: #de3d81;
   color: #ffffff;
-}
-h1 {
-  font-family: AauxNext-Regular, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 h1 span {
   font-weight: normal;
@@ -20,76 +16,33 @@ a:hover {
   color: #ce3475;
   text-decoration: none;
 }
-hr {
-  border: none;
-  background: repeat-x url(../img/header_horiz_dots.gif) bottom;
-  margin: 0;
-  height: 1px;
-}
-.default-button {
-  display: block;
-  float: left;
-  margin: 0 0 15px 0;
-  padding: 10px 30px;
-  background: #bb2d69;
-  border-radius: 10px;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  font-weight: bold;
-}
-.default-button:hover {
-  color: #de3d81;
-  background: #ffffff;
-}
-.default-button:active {
-  color: #ffffff;
-  background: #922352;
-}
 .phase-1,
 .phase-2,
 .phase-3,
 .phase-4 {
   display: none;
 }
-/******** Header **********/
-.header .phase-1 a.new-form {
+a.new-form {
   display: block;
-  float: left;
-  margin: 0 0 15px 0;
+  float: right;
+  margin: 5px 0;
   padding: 10px 30px;
   background: #bb2d69;
   border-radius: 10px;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   font-weight: bold;
-  float: right;
 }
-.header .phase-1 a.new-form:hover {
+a.new-form:hover {
   color: #de3d81;
   background: #ffffff;
 }
-.header .phase-1 a.new-form:active {
+a.new-form:active {
   color: #ffffff;
   background: #922352;
 }
-.header p {
-  text-align: right;
-  margin-top: 12px;
-  vertical-align: middle;
-  font-size: 14px;
-  color: #f4c0d6;
-}
-.header p em {
-  font-weight: bold;
-  color: #ffffff;
-  font-style: normal;
-}
-/******** Contestants **********/
 .contestant {
   margin-bottom: 20px;
-}
-.contestant > a {
-  display: block;
 }
 .contestant .contestant-area {
   background: #ce3475;
@@ -99,7 +52,7 @@ hr {
   position: relative;
   list-style: none;
   margin: 0;
-  -webkit-perspective: 800;
+  -webkit-perspective: 500;
 }
 .contestant .contestant-area .contestant-area-roomblock li {
   position: absolute;
@@ -164,118 +117,17 @@ hr {
 .contestant .contestant-title {
   background: #606060;
   padding: 6px 12px 6px 18px;
-  height: 72px;
 }
-.contestant .contestant-title .contestant-title-block {
-  float: left;
-  width: 80%;
-}
-.contestant .contestant-title .contestant-title-block h2 {
+.contestant .contestant-title h2 {
   margin-left: -9px;
 }
-.contestant .contestant-title .contestant-title-block p {
+.contestant .contestant-title p {
   font-weight: bold;
   -moz-opacity: 0.5;
   -khtml-opacity: 0.5;
   -webkit-opacity: 0.5;
   opacity: 0.5;
 }
-.contestant .contestant-title .contestant-title-vote {
-  float: left;
-  width: 20%;
-}
-.contestant .contestant-title .contestant-title-vote .vote-button {
-  text-indent: -9999em;
-  width: 36px;
-  height: 36px;
-  margin-top: 12px;
-  background: #ffffff;
-  border: 4px solid #474747;
-}
-.contestant .contestant-title .contestant-title-vote .vote-button:hover {
-  border-color: #de3d81;
-}
-.contestant .contestant-title .contestant-title-vote .vote-button:active {
-  border-color: #606060;
-}
-.contestant .contestant-title .contestant-title-vote .vote-button.selected {
-  background: #ffffff url(../img/check.gif) no-repeat center;
-}
-.contestant .contestant-title .contestant-title-vote .vote-button.disabled {
-  pointer-events: none;
-  -moz-opacity: 0.1;
-  -khtml-opacity: 0.1;
-  -webkit-opacity: 0.1;
-  opacity: 0.1;
-  z-index: -1;
-}
-.vote-submit {
-  display: block;
-  position: fixed;
-  z-index: 5;
-  cursor: pointer;
-  border: none;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  display: block;
-  margin: -30px 0 0;
-  height: 120px;
-  width: 200px;
-  background: #ffffff;
-  border-radius: 30px;
-  -moz-border-radius: 30px;
-  -webkit-border-radius: 30px;
-  font-weight: bold;
-  color: #bb2d69;
-  height: 60px;
-  text-align: center;
-  right: 15px;
-  top: 50%;
-  vertical-align: middle;
-}
-.vote-submit.disabled {
-  pointer-events: none;
-  -moz-opacity: 0.5;
-  -khtml-opacity: 0.5;
-  -webkit-opacity: 0.5;
-  opacity: 0.5;
-  color: #ffffff;
-  border-color: #bb2d69;
-  background: #bb2d69;
-}
-.vote-submit.disabled span {
-  background-position: 21px 0px;
-}
-.vote-submit p {
-  line-height: 60px;
-  width: 158px;
-  float: left;
-}
-.vote-submit span {
-  display: block;
-  width: 21px;
-  height: 30px;
-  margin: 14px 0 0 0;
-  background: url(../img/pagination.png);
-  text-indent: -99999em;
-  background-position: 21px 30px;
-  float: left;
-}
-.vote-submit:hover {
-  color: #ffffff;
-  border-color: #bb2d69;
-  background: #bb2d69;
-}
-.vote-submit:hover span {
-  background-position: 21px 0px;
-}
-.vote-submit:active {
-  background: #922352;
-  border-color: #922352;
-  color: #ffffff;
-}
-/******** Map **********/
 #map {
   position: fixed;
   height: 100%;
@@ -640,24 +492,13 @@ hr {
   background: #922352;
   color: #ffffff;
 }
-/******** Footer **********/
 #footer {
-  position: relative;
-  margin-top: 120px;
+  margin-top: 50px;
   background: #ffffff url(../img/pink_dot_bg.gif) repeat-x;
-  min-height: 500px;
+  min-height: 400px;
   color: #2d2d2d;
+  padding-top: 200px;
 }
-#footer .container {
-  position: absolute;
-  margin-top: -80px;
-  background: white;
-  padding: 40px;
-  width: 860px;
-  margin-left: -470px;
-  left: 50%;
-}
-/******** Misc/Popups **********/
 .confirm {
   position: fixed;
   top: 50%;
@@ -708,7 +549,7 @@ hr {
 }
 .mousetip {
   top: 0;
-  position: absolute;
+  position: fixed;
   padding: 5px;
   width: 100px;
   text-align: center;
@@ -738,52 +579,4 @@ hr {
   border-top-color: inherit;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-}
-.popup {
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  z-index: 99;
-  display: none;
-  cursor: pointer;
-}
-.popup .popup-cover {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background-color: #de3d81;
-  -moz-opacity: 0.95;
-  -khtml-opacity: 0.95;
-  -webkit-opacity: 0.95;
-  opacity: 0.95;
-  z-index: -1;
-}
-.popup .popup-message {
-  position: fixed;
-  width: 400px;
-  left: 50%;
-  top: 50%;
-  margin: -100px 0 0 -200px;
-}
-.popup .popup-message p {
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-}
-.popup .popup-message .default-button {
-  margin: 20px auto;
-  float: none;
-  width: 80px;
-  text-align: center;
-}
-.popup .popup-message .button-wrap {
-  margin: 0 auto;
-  width: 312px;
-}
-.popup .popup-message .button-wrap .default-button {
-  margin: 20px 8px 0;
-  float: right;
-  width: 80px;
-  text-align: center;
 }

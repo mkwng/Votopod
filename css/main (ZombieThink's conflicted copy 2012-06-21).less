@@ -1,5 +1,3 @@
-/******** Global Elements **********/
-
 @odopink: #de3d81;
 @dgrey: #606060;
 
@@ -39,10 +37,6 @@ body {
 	background:@odopink;
 	color:#ffffff;
 }
-
-h1 {
-	font-family:AauxNext-Regular, "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
 h1 span{
 	font-weight:normal;
 	font-size:.9em;
@@ -57,17 +51,13 @@ a {
 
 }
 
-hr {
-	border:none;
-	background:repeat-x url(../img/header_horiz_dots.gif) bottom;
-	margin:0;
-	height:1px;
+.phase-1,.phase-2,.phase-3,.phase-4 {
+	display:none;
 }
-
-.default-button {
+a.new-form {
 	display:block;
-	float:left;
-	margin:0 0 15px 0;
+	float:right;
+	margin:5px 0;
 	padding: 10px 30px;
 	background:desaturate(darken(@odopink, 10%),10%);
 	.border-radius(10px);
@@ -83,33 +73,10 @@ hr {
 	}
 }
 
-.phase-1,.phase-2,.phase-3,.phase-4 {display:none;}
 
-/******** Header **********/
-
-.header{
-	.phase-1{
-		a.new-form {
-			.default-button;
-			float:right;
-		}
-	}
-	p {
-		text-align:right;
-		margin-top:12px;
-		vertical-align:middle;
-		font-size:14px;
-		color:lighten(@odopink, 30%);
-		em {font-weight:bold; color:#ffffff; font-style:normal;}
-	}
-}
-
-/******** Contestants **********/
 
 .contestant {
 	margin-bottom:20px;
-
-	> a{display: block;}
 
 	.contestant-area {
 		background:desaturate(darken(@odopink, 5%),10%);
@@ -119,7 +86,7 @@ hr {
 			position:relative;
 			list-style:none;
 			margin:0;
-			-webkit-perspective: 800;
+			-webkit-perspective: 500;
 
 			li {
 				position:absolute;
@@ -147,96 +114,12 @@ hr {
 	.contestant-title {
 		background:@dgrey;
 		padding:6px 12px 6px 18px;
-		height:72px;
 
-		.contestant-title-block{
-			float:left;
-			width:80%;
-			h2 {margin-left:-9px;}
-			p {font-weight:bold; .opacity(.5);}
-		}
-		.contestant-title-vote{
-			float:left;
-			width:20%;
-
-			.vote-button{
-				text-indent:-9999em;
-				width:36px;
-				height:36px;
-				margin-top:12px;
-				background:#ffffff;
-				border:4px solid darken(@dgrey,10%);
-				&:hover { border-color:@odopink;}
-				&:active { border-color:@dgrey;}
-				&.selected{
-					background: white url(../img/check.gif) no-repeat center;
-				}
-				&.disabled{pointer-events:none;.opacity(.1);z-index:-1;}
-			}
-		}
-
+		h2 {margin-left:-9px;}
+		p {font-weight:bold; .opacity(.5);}
 	}
 
 }
-.vote-submit{
-	display:block;
-	position:fixed;
-	z-index:5;
-	cursor:pointer;
-	border:none;
-	.box-shadow(none);
-	display:block;
-	margin:-30px 0 0;
-	height:120px;
-	width:200px;
-	background:#ffffff;
-	.border-radius(30px);
-	font-weight:bold;
-	color:desaturate(darken(@odopink, 10%),10%);
-	height:60px;
-	text-align:center;
-	right:15px;
-	top:50%;
-	vertical-align:middle;
-
-	&.disabled{pointer-events:none;.opacity(.5);
-		color:#ffffff;
-		border-color:desaturate(darken(@odopink, 10%),10%);
-		background:desaturate(darken(@odopink, 10%),10%);
-
-		span{background-position: 21px 0px;}
-	}
-
-	p {line-height:60px; width:158px;float:left;}
-
-	span{
-		display:block;
-		width:21px;
-		height:30px; 
-		margin:14px 0 0 0;
-		background:url(../img/pagination.png);
-		text-indent:-99999em;
-		background-position: 21px 30px;
-		float:left;
-	}
-
-	&:hover {
-		color:#ffffff;
-		border-color:desaturate(darken(@odopink, 10%),10%);
-		background:desaturate(darken(@odopink, 10%),10%);
-
-		span{background-position: 21px 0px;}
-	}
-	&:active {
-		background:desaturate(darken(@odopink, 20%),10%);
-		border-color:desaturate(darken(@odopink, 20%),10%);
-		color:#ffffff;
-		// span{background-position: 21px 30px;}
-	}
-}
-
-/******** Map **********/
-
 
 #map{
 	position:fixed;
@@ -565,27 +448,13 @@ hr {
 	}
 }
 
-/******** Footer **********/
-
 #footer{
-	position:relative;
-	margin-top:120px;
+	margin-top:50px;
 	background:#ffffff url(../img/pink_dot_bg.gif) repeat-x;
-	min-height:500px;
+	min-height:400px;
 	color:darken(@dgrey,20%);
-
-	.container{
-		position:absolute;
-		margin-top:-80px;
-		background:white;
-		padding:40px;
-		width:860px;
-		margin-left:-470px;
-		left:50%;
-	}
+	padding-top:200px;
 }
-
-/******** Misc/Popups **********/
 
 .confirm {
 	position:fixed;
@@ -626,7 +495,7 @@ hr {
 
 .mousetip {
 	top:0;
-	position:absolute;
+	position:fixed;
 	padding:5px;
 	width:100px;
 	text-align:center;
@@ -649,39 +518,5 @@ hr {
 		border-top-color: inherit; 
 		border-left: 5px solid transparent;
 		border-right: 5px solid transparent; 
-	}
-}
-
-.popup {
-	position:fixed;
-	height:100%;
-	width:100%;
-	top:0;
-	z-index:99;
-	display:none;
-	cursor:pointer;
-	.popup-cover{
-		position:fixed;
-		width:100%;
-		height:100%;
-		background-color:@odopink;
-		.opacity(.95);
-		z-index:-1;
-	}
-	.popup-message {
-		position:fixed;
-		width:400px;
-		left:50%;
-		top:50%;
-		margin:-100px 0 0 -200px;
-		p {
-			font-size:24px;
-			font-weight:bold;
-			text-align:center;
-		}
-		.default-button{margin:20px auto; float:none; width:80px; text-align:center;}
-		.button-wrap{margin:0 auto;width:312px;
-			.default-button{margin:20px 8px 0; float:right; width:80px; text-align:center;}
-		}
 	}
 }

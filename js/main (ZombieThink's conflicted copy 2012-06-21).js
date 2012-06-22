@@ -31,9 +31,6 @@ var Map = {
 			}).animate({
 				translateX:0,
 				opacity:1
-			},300,function() {
-				self.labels.fadeIn();
-				self.mapTitles.fadeIn();
 			});
 		}
 		else if(options.direction == "right") {
@@ -45,9 +42,6 @@ var Map = {
 			}).animate({
 				translateX:0,
 				opacity:1
-			},300,function() {
-				self.labels.fadeIn();
-				self.mapTitles.fadeIn();
 			});
 		}
 		else {
@@ -57,10 +51,7 @@ var Map = {
 				rotateX: -Math.PI/4,
 				translateZ: 240,
 				scale:.75
-			},650,function() {
-				self.labels.fadeIn();
-				self.mapTitles.fadeIn();
-			});
+			},300);
 		}
 	},
 	buildOut: function(opts) {
@@ -76,38 +67,40 @@ var Map = {
 		else {
 			self.labels.fadeOut(100);
 			self.nav.fadeOut(100);
-			self.mapContainer.stop().fadeOut(300, function() {
+			self.bigmap.stop().animate({
+				rotateX: 0,
+				translateZ: 0,
+				scale:1
+			},300);
+			self.mapContainer.stop().fadeOut(200, function() {
 				self.labels.hide().find('ol').remove();
 				self.mapTitles.find("h2").html('""');
 				self.mapTitles.find(".title-author").html("");
 				self.mapContainer.find(".error").removeClass("error");
-				$(".form-submit").remove();
-				self.bigmap.stop().css({
-					rotateX: 0,
-					translateZ: 0,
-					scale:1
-				});
+				$(".form-submit").remove()
 			});
 		}
+
 	},
 	confirmClose: function() {
 		var self = this;
-		if($(".popup").size()==0){
-				var popup = $('<div class="popup" style="display:none"><div class="popup-cover"></div><div class="popup-message"><p>Are you sure?</p><p>You will lose all progress.</p><div class="button-wrap"><a class="confirm-close default-button" href="#">Close</a><a class="confirm-cancel default-button" href="#">Don&apos;t Close</a></div></div></div>');
-				popup.appendTo("body").fadeIn(200);
-				popup.find(".confirm-cancel").click(function() {
-					popup.fadeOut(100, function() {
-						popup.remove();
-					})
-				});
-				popup.find(".confirm-close").click(function() {
-					popup.fadeOut(100, function() {
-						$(".popup").remove();
-					})
-					self.activeIndex = 0
-					self.buildOut({confirmed: true});
-				});
-			}
+
+		var popup = $('<div class="confirm" style="display:none"><h2>Are you sure?</h2><p>You will lose all progress.</p><a class="confirm-close" href="#">Close</a><a class="confirm-cancel" href="#">Don&apos;t Close</a></div>');
+		popup.appendTo("body").fadeIn(200);
+		popup.find(".confirm-cancel").click(function() {
+			popup.fadeOut(100, function() {
+				popup.remove();
+			})
+		});
+		popup.find(".confirm-close").click(function() {
+			popup.fadeOut(100, function() {
+				$(".confirm").remove();
+			})
+			self.activeIndex = 0
+			self.buildOut({confirmed: true});
+		});
+
+
 	},
 	buildLabels: function(contestant) {
 		var self = this;
@@ -145,7 +138,8 @@ var Map = {
 			self.mapTitles.find("h2").html('"'+title+'"');
 			self.mapTitles.find(".title-author").html(author);
 
-
+			self.labels.fadeIn();
+			self.mapTitles.fadeIn();
 		}
 	},
 	buildForm: function() {
@@ -172,7 +166,7 @@ var Map = {
 			.appendTo(".map-labels")
 			.find("li").each(function(i) {
 				var self = $(this);
-				self.data("name","").find("span.room-name").html('<input type="text" id="room-'+(i+1)+'" placeholder="Room Name">');
+				self.data("name","").find("span.room-name").html('<input type="text" id="room-'+i+'" placeholder="Room Name">');
 			});
 
 
@@ -184,6 +178,8 @@ var Map = {
 			});
 		});
 
+		self.labels.fadeIn();
+		self.mapTitles.fadeIn();
 
 		//Form Validation
 		submitButton.unbind("click").click(function() {
@@ -204,7 +200,7 @@ var Map = {
 				else input.parent().removeClass("error");
 			}
 		});
-		console.log(errors + " errors")
+		console.log(errors)
 		if(errors==0) {
 
 			$('#id_author').val($('#author-name').val().replace(/\W/g, ''));
@@ -216,16 +212,12 @@ var Map = {
 			$('#id_room_5_name').val($('#room-5').val().replace(/\W/g, ''));
 			$('#id_room_6_name').val($('#room-6').val().replace(/\W/g, ''));
 			$('#id_room_7_name').val($('#room-7').val().replace(/\W/g, ''));
-			// $.each("#themeForm input", function() {
-			// 	console.log( $(this).val() );
-			// });
+			$.each("#themeForm input", function() {
+				console.log($(this).val());
+			});
+			$("#real-submit").submit();
 
-			popupMessage("Thank you for your submission!");
 			self.buildOut({confirmed:true});
-
-
-			$("#submit").submit();
-
 		}
 		else {
 			//alert that there are errors
@@ -236,23 +228,24 @@ var Map = {
 		var contestants = $(".contestant");
 		var next = ++self.activeIndex >= contestants.size() ? 0 : self.activeIndex;
 		console.log(next);
-		self.labels.stop().hide().find('ol').stop().remove();
-		mapTitles = self.mapContainer.find(".map-title").stop().hide();
+		self.labels.hide().find('ol').remove();
+		mapTitles = self.mapContainer.find(".map-title").hide();
 
-		self.bigmap.stop().animate({translateX:"-=400",opacity:"0"},300,function() {
+		self.bigmap.animate({translateX:"-=400",opacity:"0"},300,function() {
 			self.buildIn({direction:"left"});
 			self.buildLabels(contestants.eq(next));
 		});
+
 	},
 	prevItem: function() {
 		var self = this;
 		var contestants = $(".contestant");
 		var next = --self.activeIndex < 0 ? contestants.size()-1 : self.activeIndex;
 		console.log(next);
-		self.labels.stop().hide().find('ol').stop().remove();
-		mapTitles = self.mapContainer.find(".map-title").stop().hide();
+		self.labels.hide().find('ol').remove();
+		mapTitles = self.mapContainer.find(".map-title").hide();
 
-		self.bigmap.stop().animate({translateX:"+=400",opacity:"0"},300,function() {
+		self.bigmap.animate({translateX:"+=400",opacity:"0"},300,function() {
 			self.buildIn({direction:"right"});
 			self.buildLabels(contestants.eq(next));
 		});
@@ -342,10 +335,15 @@ $.fn.errorBounce = function(opts){
 	});
 }
 
-var initializeContestant = function(contestant) {
-	var self = $(contestant);
+$(document).ready(function() {
 
-		//Put the data in.
+	// handle current phase...
+	$(".phase-"+phase).show();
+
+	$(".contestant").each(function() {
+		var self = $(this);
+
+		//Put the data-name into the actual box.
 		self.find("li").each(function(i) {
 			var self = $(this);
 			var maxLength = Math.ceil(self.width()/10);
@@ -354,132 +352,22 @@ var initializeContestant = function(contestant) {
 				self.data("name").length < maxLength ? self.data("name") : self.data("name").substr(0,maxLength-2)+"&hellip;"
 			);
 		});
-		
 
-		self.find("h2").html('"'+(self.data("name").length < 16 ? self.data("name") : self.data("name").substr(0,14)+"&hellip;")+'"');
+		self.find("h2").html('"'+self.data("name")+'"');
 		self.find(".title-author").html(self.data("author"));
 
 		//Hover interaction, including flying box animation
 		self.roomblockHover();
 
-
-		//The vote button has different interactions
-		self.find(".vote-button")
-			.hover(function() {
-				$(".mousetip").stop().fadeTo(40,0);
-			},
-			function() {
-				$(".mousetip").stop().fadeTo(40,.95);
-			})
-			.click(function() {
-				var self = $(this);
-				$("#vote-submit").removeClass("disabled").fadeIn();
-				self.toggleClass("selected");
-				if(self.hasClass("selected")) {
-					$(".vote-button").not(self).removeClass("selected");
-				} else {
-				$("#vote-submit").addClass("disabled");
-				}
-				return false;
-			});
-
 		//Build in the map view
 		self.click(function() {
-			contestantClick(this);
+			$(this).mouseout();
+			Map.buildLabels(this);
+			Map.buildIn();
+
+
 			return false;
 		});
-}
-
-var initializeVote = function() {
-	var voteButton = $('<div id="vote-submit" class="vote-submit phase-3 disabled" style="display:none"><p>Submit Your Vote</p><span></span></div>');
-	if($("#vote-submit").size()==0) voteButton.appendTo("body").click(function() {
-		//Submit the vote
-
-		$("#vote-submit").remove();
-		$(".vote-button").addClass("disabled");
-		popupMessage("Thank you for your vote!");
-	});
-}
-
-var mapRoomPositions = {
-	0:["155","52",".7",".3"],
-	1:["348","154",".75",".33"],
-	2:["425","154",".75",".33"],
-	3:["343","202",".8",".4"],
-	4:["426","202",".8",".4"],
-	5:["738","234","1",".5"],
-	6:["750","311","1",".5"]
-}
-var contestantClick = function(contestant) {
-	Map.buildLabels(contestant);
-	Map.buildIn();
-
-	var flyingBoxes = $(contestant).clone();
-	flyingBoxes.css({
-			position:"fixed",
-			top:$(contestant).offset().top,
-			left:$(contestant).offset().left,
-			margin:"0",
-			padding:"0",
-			zIndex:"100",
-			pointerEvents:"none",
-			width:"904px",
-			height:"648px",
-		})
-		.animate({
-			top:"80px",
-			left:$(".map-container").offset().left,
-		},600);
-
-	flyingBoxes.find(".contestant-title").css({visibility:"hidden"});
-	flyingBoxes.find(".contestant-area").css({background:"transparent"});
-	flyingBoxes.appendTo("body");
-
-
-	var rooms = flyingBoxes.find("li");
-
-	rooms.stop().each(function(i) {
-		var self = $(this).css({position:"absolute"});
-		self.css({
-
-		}).animate({
-			translateZ: 240,
-			rotateY:0,
-			rotateX: -Math.PI/4,
-			left:mapRoomPositions[i][0],
-			top:mapRoomPositions[i][1],
-			scaleY:mapRoomPositions[i][3],
-			scaleX:mapRoomPositions[i][2],
-			opacity:.3
-		},600).fadeTo(300,0,function() {flyingBoxes.remove();});
-	});
-
-	$(contestant).mouseout();
-}
-
-var popupMessage = function(message){
-	if($(".popup").size()==0) {
-		var popupContainer = $('<div class="popup"></div>');
-		var popupCover = $('<div class="popup-cover"></div>');
-		var popupMessage = $('<div class="popup-message"><p></p><div class="default-button">Dismiss</div></div>');
-		popupCover.appendTo(popupContainer);
-		popupMessage.find("p").html(message);
-		popupMessage.appendTo(popupContainer);
-		popupContainer.appendTo("body").fadeIn(300);
-	
-		popupContainer.click(function() {
-			$(this).fadeOut(300,function() {$(this).remove();});
-		});
-	}
-}
-
-$(document).ready(function() {
-
-	// handle current phase...
-	$(".phase-"+phase).show();
-
-	$(".contestant").each(function() {
-		initializeContestant(this);
 	});
 
 	//Build in the form view
@@ -487,10 +375,6 @@ $(document).ready(function() {
 		Map.buildForm();
 		Map.buildIn({showNav:false});
 	});
-
-	if(phase == 3) {
-		initializeVote();
-	}
 
 	//Map Navigation
 	$("#map .map-nav-right").click(function() { Map.nextItem(); });
@@ -500,11 +384,6 @@ $(document).ready(function() {
 		if (e.keyCode == 13) { $('.form-submit').click(); }     // enter
 		if (e.keyCode == 27) { $('.map-nav-close').click(); }   // esc
 	});
-
-
-
-
-	
 });
 
 
