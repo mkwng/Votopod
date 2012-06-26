@@ -207,15 +207,15 @@ var Map = {
 		console.log(errors + " errors")
 		if(errors==0) {
 
-			$('#id_author').val($('#author-name').val().replace(/[^a-z 0-9]+/gi,'');
-			$('#id_title').val($('#theme-name').val().replace(/[^a-z 0-9]+/gi,'');
-			$('#id_room_1_name').val($('#room-1').val().replace(/[^a-z 0-9]+/gi,'');
-			$('#id_room_2_name').val($('#room-2').val().replace(/[^a-z 0-9]+/gi,'');
-			$('#id_room_3_name').val($('#room-3').val().replace(/[^a-z 0-9]+/gi,'');
-			$('#id_room_4_name').val($('#room-4').val().replace(/[^a-z 0-9]+/gi,'');
-			$('#id_room_5_name').val($('#room-5').val().replace(/[^a-z 0-9]+/gi,'');
-			$('#id_room_6_name').val($('#room-6').val().replace(/[^a-z 0-9]+/gi,'');
-			$('#id_room_7_name').val($('#room-7').val().replace(/[^a-z 0-9]+/gi,'');
+			// $('#id_author').val($('#author-name').val().replace(/[^a-z 0-9]+/gi,'');
+			// $('#id_title').val($('#theme-name').val().replace(/[^a-z 0-9]+/gi,'');
+			// $('#id_room_1_name').val($('#room-1').val().replace(/[^a-z 0-9]+/gi,'');
+			// $('#id_room_2_name').val($('#room-2').val().replace(/[^a-z 0-9]+/gi,'');
+			// $('#id_room_3_name').val($('#room-3').val().replace(/[^a-z 0-9]+/gi,'');
+			// $('#id_room_4_name').val($('#room-4').val().replace(/[^a-z 0-9]+/gi,'');
+			// $('#id_room_5_name').val($('#room-5').val().replace(/[^a-z 0-9]+/gi,'');
+			// $('#id_room_6_name').val($('#room-6').val().replace(/[^a-z 0-9]+/gi,'');
+			// $('#id_room_7_name').val($('#room-7').val().replace(/[^a-z 0-9]+/gi,'');
 			// $.each("#themeForm input", function() {
 			// 	console.log( $(this).val() );
 			// });
@@ -417,7 +417,7 @@ var contestantClick = function(contestant) {
 	var flyingBoxes = $(contestant).clone();
 	flyingBoxes.css({
 			position:"fixed",
-			top:$(contestant).offset().top,
+			top:$(contestant).offset().top-$(window).scrollTop(),
 			left:$(contestant).offset().left,
 			margin:"0",
 			padding:"0",
