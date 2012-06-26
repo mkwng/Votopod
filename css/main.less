@@ -35,6 +35,12 @@ input:focus {outline:none !important;}
                                    @start 0%,
                                    @stop 100%);
 }
+
+.perspective(@arguments) {
+			-webkit-perspective:@arguments;
+			-moz-perspective:@arguments;
+			perspective:@arguments;
+}
 body {
 	background:@odopink;
 	color:#ffffff;
@@ -119,7 +125,7 @@ hr {
 			position:relative;
 			list-style:none;
 			margin:0;
-			-webkit-perspective: 800;
+			.perspective(800);
 
 			li {
 				position:absolute;
@@ -334,7 +340,7 @@ hr {
 	.map-container{
 		width:904px;
 		height:648px;
-		-webkit-perspective: 800;
+		.perspective(800);
 		top: 80px;
 		z-index: 0;
 		position:absolute;
